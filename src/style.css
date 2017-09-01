@@ -1,0 +1,109 @@
+html, body {
+    height: 100%;
+}
+.main {
+    width: 100%;
+    height: 100%;
+}
+.navigation {
+    padding: 0 0 0 1px;
+    height: 36px;
+    width: 100%;
+    overflow-y: auto;
+    background: #f1f1f1;
+}
+.navigation .nav-tabs {
+    border: 0;
+}
+.navigation .nav-tabs li {
+    background: #dedede;
+    border-top: solid 2px #dedede;
+    z-index: 1;
+    margin: 1px;
+}
+.navigation .nav-tabs li.active {
+    background: #FFF;
+    border-top: solid 2px #FFF;
+    z-index: 2;
+}
+.navigation .nav-tabs li .title {
+    float: left;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 30px;
+    padding: 0 10px 2px;
+}
+.navigation .nav-tabs li .close-saved,
+.navigation .nav-tabs li .close-unsaved {
+    position: relative;
+    float: right;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 29px;
+    margin-left: 10px;
+}
+.navigation .nav-tabs li .close-unsaved {
+    top: 0.5px;
+}
+.editorSpace {
+    position: relative;
+    height: calc(100% - 50px);
+}
+
+.ace_editor.editor { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    font-family: Consolas, 'Courier New', monospace;
+}
+.ace_editor.editor .ace_gutter {
+    background: #fefefe;
+    color: #CCC;
+}
+.ace_editor.editor .ace_gutter-active-line {
+    background-color: #333;
+}
+.editor .inline-image {
+    padding: 10px;
+}
+
+.editor .inline-image img {
+    height: 120px;
+}
+
+.editor .ace_heading.ace_1 {
+    font-weight: bold;
+    color: #0000ff;
+}
+.editor .ace_heading.ace_2 {
+    font-weight: normal;
+    color: #0044EE;
+}
+.editor .ace_heading.ace_3 {
+    font-weight: normal;
+    color: #0066CC;
+}
+.editor .ace_heading.ace_4 {
+    font-weight: normal;
+    color: #6688AA;
+}
+.editor .ace_link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.editor .ace_task_todo {
+    color: red;
+}
+.editor .ace_task_waiting {
+    color: orange;
+}
+.editor .ace_task_done {
+    color: green;
+}
+.editor .ace_toggle_open, .editor .ace_toggle_close {
+    color: lightgray;
+    cursor: pointer;
+}
