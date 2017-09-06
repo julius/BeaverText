@@ -16,7 +16,7 @@ class NotesFile {
         this.elemTab.find(".close-unsaved").click(() => this.closeUnsaved());
 
         this.handleSaved();
-        this.notesEditor.setContent(this.loadedFile);
+        this.notesEditor.setContent(this.loadedFile, this.filePath);
         this.notesEditor.hide();
 
         this.notesEditor.eventDocumentChange.listen(() => {

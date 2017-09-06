@@ -1,6 +1,7 @@
 require("./ace-mode-notes.js");
 const Document = ace.require("ace/document").Document;
 const SimpleEvent = require("./../SimpleEvent").SimpleEvent;
+const path = require("path");
 
 class NotesEditor {
     constructor(editorElem) {
@@ -12,7 +13,9 @@ class NotesEditor {
         this.editor.on("change", () => this.eventDocumentChange.trigger())
     }
 
-    setContent(fileContent) {
+    setContent(fileContent, filePath) {
+        this.filePath = filePath;
+
         const session = ace.createEditSession(new Document(fileContent));
         this.editor.setSession(session);
         this.editor.getSession().setMode("ace/mode/notes");
@@ -46,6 +49,16 @@ class NotesEditor {
         $(this.editorElem).remove();
     }
 
+    /**
+     * Special token:
+     *      __dir__ => dirname of current file
+     */
+    extendUrlWithSpecialTokens(url) {
+        const dirname = path.dirname(this.filePath);
+        url = url.replace(/__dir__/g, dirname);
+        return url;
+    }
+
     setupDisplayImagesForNewDocument() {
         const LineWidgets = ace.require("ace/line_widgets").LineWidgets;
 
@@ -55,7 +68,7 @@ class NotesEditor {
             session.widgetManager.attach(this.editor);
         }
 
-        function displayImagesInLine(row) {
+        const displayImagesInLine = (row) => {
             const linkTokens = session.getTokens(row).filter((token) => token.type == "link");
             const hasToggleOpen = session.getTokens(row).filter((token) => token.type == "toggle_open").length > 0;
 
@@ -65,11 +78,12 @@ class NotesEditor {
 
             if (linkTokens.length > 0 && hasToggleOpen) {
                 const token = linkTokens[0];
+                const url = this.extendUrlWithSpecialTokens(token.value);
                 session.widgetManager.addLineWidget({
                     row: row, 
                     fixedWidth: true,
                     coverGutter: false,
-                    el: $("<div class='inline-image'><img src='"+token.value+"'></div>")[0],
+                    el: $("<div class='inline-image'><img src='"+url+"'></div>")[0],
                     type: "inline images"
                 })
             }
@@ -94,13 +108,14 @@ class NotesEditor {
         const session = this.editor.session;
 
         this.editor.off("mousedown", multiSelectOnMouseDown)
-        this.editor.on("mousedown", function(event){
+        this.editor.on("mousedown", (event) => {
             if ((event.getAccelKey() && event.getButton() == 0) || event.getButton() == 2) {
                 const docPos = event.getDocumentPosition();
                 const token = session.getTokenAt(docPos.row, docPos.column);
 
                 if(token && token.type == "link"){
-                    shell.openExternal(token.value);
+                    const url = this.extendUrlWithSpecialTokens(token.value);
+                    shell.openExternal(url);
                     event.preventDefault();
                     event.stopPropagation();
                     return;

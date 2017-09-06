@@ -47,7 +47,7 @@ html, body {
 }
 .editorSpace {
     position: relative;
-    height: calc(100% - 50px);
+    height: calc(100% - 36px);
 }
 
 .ace_editor.editor { 
