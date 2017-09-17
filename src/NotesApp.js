@@ -1,10 +1,14 @@
 const NotesFile = require("./NotesFile.js").NotesFile;
 const NotesEditor = require("./NotesEditor/NotesEditor.js").NotesEditor;
+const ImageDisplay = require("./ImageDisplay.js").ImageDisplay;
+const ImageInserter = require("./ImageInserter.js").ImageInserter;
 const fs = require("fs");
 const path = require("path");
 const remote = require('electron').remote;
 const {dialog} = require('electron').remote;
 const {Menu, MenuItem} = require('electron').remote;
+const {clipboard} = require('electron')
+const {nativeImage} = require('electron')
 
 class NotesApp {
     constructor() {
@@ -13,9 +17,77 @@ class NotesApp {
         this.files = [];
         this.activeFile = null;
 
+        this.setupImageInserter();
+        this.setupImageDisplay();
         this.setupMenu();
         this.setupDragDropHandler();
         this.loadSession();
+        this.setupUnsavedFilesChecker();
+    }
+
+    tryPastingImageFromClipboard() {
+        const image = clipboard.readImage();
+        if (image.isEmpty()) {
+            return null;
+        }
+        this.imageInserter.show(image);
+    }
+
+    setupImageDisplay() {
+        this.imageDisplay = new ImageDisplay($(".modal.imageDisplay"));
+        this.imageDisplay.eventClose.listen(() => {
+            if (!this.activeFile) return;
+            this.activeFile.notesEditor.focus();            
+        })
+    }
+
+    setupImageInserter() {
+        this.imageInserter = new ImageInserter($(".modal.imageInserter"));
+        this.imageInserter.eventClose.listen(() => {
+            if (!this.activeFile) return;
+            this.activeFile.notesEditor.focus();            
+        })
+
+        const shortId = () => {
+            const rnd = Math.floor(Math.random() * 1000000);
+            return rnd.toString(36);
+        }
+
+        const uniqueFileName = (dir, fileExt) => {
+            const fileName = shortId() + fileExt;
+            const filePath = path.join(dir, fileName);
+            if (fs.existsSync(filePath)) {
+                return uniqueFileName(dir, fileExt);
+            }
+            return fileName;
+        }
+
+        const insertImageIntoEditor = (fileName) => {
+            const urlImages = "file://__dir__/" + path.basename(this.activeFile.filePath) + "-images/" + fileName;
+            const insertText = "[-] " + urlImages;
+            this.activeFile.notesEditor.insertLineAtCursor(insertText);
+        }
+
+        this.imageInserter.eventImageInsert.listen((image) => {
+            if (!this.activeFile) return;
+            const dirNoteFile = path.dirname(this.activeFile.filePath);
+            const dirImages = path.join(dirNoteFile, path.basename(this.activeFile.filePath) + "-images");
+            const fileName = uniqueFileName(dirImages, ".jpg");
+            const filePath = path.join(dirImages, fileName);
+            if (!fs.existsSync(dirImages)) fs.mkdirSync(dirImages);            
+            fs.writeFileSync(filePath, image.toJPEG(80));
+            insertImageIntoEditor(fileName);
+        })
+        this.imageInserter.eventImageInsertPNG.listen((image) => {
+            if (!this.activeFile) return;
+            const dirNoteFile = path.dirname(this.activeFile.filePath);
+            const dirImages = path.join(dirNoteFile, path.basename(this.activeFile.filePath) + "-images");
+            const fileName = uniqueFileName(dirImages, ".png");
+            const filePath = path.join(dirImages, fileName);
+            if (!fs.existsSync(dirImages)) fs.mkdirSync(dirImages);
+            fs.writeFileSync(filePath, image.toPNG());
+            insertImageIntoEditor(fileName);
+        })
     }
 
     setupMenu() {
@@ -146,7 +218,10 @@ class NotesApp {
         this.files.push(notesFile);
 
         notesFile.eventRequestActiveByTabClick.listen(() => this.setActiveFile(notesFile));
-        notesFile.eventClosed.listen(() => this.handleFileClosed(notesFile))
+        notesFile.eventClosed.listen(() => this.handleFileClosed(notesFile));
+        notesFile.eventRequestImageDisplay.listen((imageUrl) => this.imageDisplay.show(imageUrl));
+        notesFile.eventPaste.listen(() => this.tryPastingImageFromClipboard());
+
         this.setActiveFile(notesFile);
     }
 
@@ -170,6 +245,25 @@ class NotesApp {
         }
     }
 
+    setupUnsavedFilesChecker() {
+        const originalTitle = document.title;
+
+        setInterval(() => {
+            let filesUnsaved = false;
+            this.files.forEach((f) => {
+                if (f.isUnsaved) {
+                    filesUnsaved = true;
+                }
+            });
+
+            if (filesUnsaved) {
+                document.title = "* " + originalTitle;
+            } else {
+                document.title = originalTitle;
+            }
+        }, 500);
+    }
+
     setupDragDropHandler() {
         document.body.ondragover = (ev) => {
             return false;
@@ -182,7 +276,20 @@ class NotesApp {
         }
         document.body.ondrop = (ev) => {
             ev.preventDefault();
-            for (let f of ev.dataTransfer.files) this.openFile(f.path);
+            for (let f of ev.dataTransfer.files) {
+                const isImageFile = [".jpg", ".jpeg", ".png"].indexOf(path.extname(f.path).toLowerCase()) !== -1;
+
+                if (isImageFile) {
+                    const image = nativeImage.createFromPath(f.path);
+                    if (!image || image.isEmpty()) {
+                        alert("Failed to load image from path: " + f.path);
+                        return;
+                    }
+                    this.imageInserter.show(image);
+                } else {
+                    this.openFile(f.path);
+                }
+            }
         }
     }
 

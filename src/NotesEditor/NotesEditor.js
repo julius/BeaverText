@@ -10,6 +10,9 @@ class NotesEditor {
         this.editor.setTheme("ace/theme/textmate");
 
         this.eventDocumentChange = new SimpleEvent();
+        this.eventImageClick = new SimpleEvent();
+        this.eventPaste = new SimpleEvent();
+
         this.editor.on("change", () => this.eventDocumentChange.trigger())
     }
 
@@ -26,6 +29,7 @@ class NotesEditor {
         
         this.setupDisplayImagesForNewDocument();
         this.setupClickTogglesAndClickLinks();
+        this.setupPasteListener();
     }
 
     getContent() {
@@ -47,6 +51,13 @@ class NotesEditor {
     destroy() {
         this.editor.destroy();
         $(this.editorElem).remove();
+    }
+
+    insertLineAtCursor(text) {
+        const session = this.editor.session;
+        const cursorRow = session.getSelection().getSelectionLead().row;
+        session.insert({row: cursorRow+1, column: 0}, text + "\n");
+        this.focus();
     }
 
     /**
@@ -79,11 +90,13 @@ class NotesEditor {
             if (linkTokens.length > 0 && hasToggleOpen) {
                 const token = linkTokens[0];
                 const url = this.extendUrlWithSpecialTokens(token.value);
+                const inlineImage = $("<div class='inline-image'><img src='"+url+"'></div>");
+                inlineImage.click(() => this.eventImageClick.trigger(url));
                 session.widgetManager.addLineWidget({
                     row: row, 
                     fixedWidth: true,
                     coverGutter: false,
-                    el: $("<div class='inline-image'><img src='"+url+"'></div>")[0],
+                    el: inlineImage[0],
                     type: "inline images"
                 })
             }
@@ -99,6 +112,10 @@ class NotesEditor {
                 displayImagesInLine(i);
             }
         });
+    }
+
+    setupPasteListener() {
+        this.editor.textInput.getElement().addEventListener("paste", (ev) => this.eventPaste.trigger());
     }
 
     setupClickTogglesAndClickLinks() {

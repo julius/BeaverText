@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Notes</title>
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="lib/cropperjs/cropper.min.css">
         <link rel="stylesheet" href="src/style.css">
     </head>
     <body>
@@ -16,11 +17,50 @@
             </div>
         </div>
 
+        <div class="modal imageDisplay">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">[Image-URL]</h4>
+                    </div>
+
+                    <div class="modal-body">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary buttonCopy">Copy to clipboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal imageInserter">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Insert image</h4>
+                    </div>
+
+                    <div class="modal-body">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default buttonInsertPNG">Insert Image as PNG</button>
+                        <button type="button" class="btn btn-primary buttonInsert">Insert Image</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <script src="lib/jquery-3.2.1.min.js"></script>    
         <script src="lib/bootstrap/js/bootstrap.min.js"></script>    
         <script src="lib/ace/ace.js"></script>    
         <script src="lib/ace/mode-markdown.js"></script>    
+        <script src="lib/cropperjs/cropper.min.js"></script>    
         <script>if (window.module) module = window.module;</script>
 
         <script>require("./src/index")</script>

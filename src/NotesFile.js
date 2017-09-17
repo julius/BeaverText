@@ -7,9 +7,12 @@ class NotesFile {
         this.loadedFile = fs.readFileSync(filePath, "utf-8");
         this.elemTab = elemTab;
         this.notesEditor = notesEditor;
+        this.isUnsaved = false;
 
+        this.eventRequestImageDisplay = new SimpleEvent();
         this.eventRequestActiveByTabClick = new SimpleEvent();
         this.eventClosed = new SimpleEvent();
+        this.eventPaste = new SimpleEvent();
 
         this.elemTab.find(".title").click(() => this.eventRequestActiveByTabClick.trigger());
         this.elemTab.find(".close-saved").click(() => this.close());
@@ -22,6 +25,13 @@ class NotesFile {
         this.notesEditor.eventDocumentChange.listen(() => {
             this.handleUnsaved();
             this.checkIfChanged();
+        })
+
+        this.notesEditor.eventImageClick.listen((imageUrl) => {
+            this.eventRequestImageDisplay.trigger(imageUrl);
+        })
+        this.notesEditor.eventPaste.listen(() => {
+            this.eventPaste.trigger();
         })
 
         this.setupFileWatcher();
@@ -44,10 +54,12 @@ class NotesFile {
     handleUnsaved() {
         this.elemTab.find(".close-saved").hide();
         this.elemTab.find(".close-unsaved").show();
+        this.isUnsaved = true;
     }
     handleSaved() {
         this.elemTab.find(".close-unsaved").hide();
         this.elemTab.find(".close-saved").show();
+        this.isUnsaved = false;
     }
 
     setActive() {
