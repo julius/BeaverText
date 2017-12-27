@@ -1,0 +1,11 @@
+# Tasks
+
+Lets do some project managing.
+
+- DONE Buy stuff on http://www.amazon.com <- right-click!
+- DONE Buy Milk
+- WAITING Make a plan
+- TODO Execute the plan
+- TODO Enjoy world domination
+
+- TODO Right click on the TODO!

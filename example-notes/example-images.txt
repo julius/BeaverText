@@ -1,0 +1,9 @@
+# Image Example
+
+You can preview Image-URLs like this:
+[-] https://upload.wikimedia.org/wikipedia/commons/7/7e/Dark_Dolphin.jpg
+
+You can insert local images via copy&paste:
+[-] file://__dir__/example-images.txt-images/kuau.jpg
+
+Try right clicking on the [-] ...

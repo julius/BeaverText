@@ -1,19 +1,21 @@
 {
-  "name": "electron-quick-start",
+  "name": "SuPlainText",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Supercharged Plain Text Notes",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . NotesApp --platform=win32 --arch=x64 --asar --overwrite --out=./out"
+    "package": "electron-packager . NotesApp --platform=win32 --arch=x64 --asar --overwrite --out=./out",
+    "package-win32": "electron-packager . NotesApp --platform=win32 --arch=x64 --asar --overwrite --out=./out",
+    "package-linux": "electron-packager . NotesApp --platform=linux --arch=x64 --asar --overwrite --out=./out"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/julius/suplaintext",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "suplaintext",
+    "plain",
+    "text",
+    "notes",
+    "electron"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
