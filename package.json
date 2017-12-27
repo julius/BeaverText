@@ -5,9 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . NotesApp --platform=win32 --arch=x64 --asar --overwrite --out=./out",
-    "package-win32": "electron-packager . NotesApp --platform=win32 --arch=x64 --asar --overwrite --out=./out",
-    "package-linux": "electron-packager . NotesApp --platform=linux --arch=x64 --asar --overwrite --out=./out"
+    "package": "electron-packager . SuPlainText --platform=win32 --arch=x64 --asar --overwrite --out=./out",
+    "package-win32": "electron-packager . SuPlainText --platform=win32 --arch=x64 --asar --overwrite --out=./out",
+    "package-linux": "electron-packager . SuPlainText --platform=linux --arch=x64 --asar --overwrite --out=./out"
   },
   "repository": "https://github.com/julius/suplaintext",
   "keywords": [
