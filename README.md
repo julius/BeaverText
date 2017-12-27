@@ -8,6 +8,8 @@ Notes App for **Plain Text Files**
 - **Images:** Image-URLs can be previewed inline.
 - **Images:** Paste your image (eg. Screenshot) into the note (image file gets saved automatically into a folder next to your text file)
 
+**[Download the latest Release](https://github.com/julius/SuPlainText/releases/)**
+
 ## Demo Task-Management
 ![Screencast](screencast1.gif)
 
