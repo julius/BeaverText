@@ -7,7 +7,7 @@
     "start": "electron .",
     "package-win32": "electron-packager . BeaverText --icon=icon256.ico --platform=win32 --arch=x64 --asar --overwrite --out=./out",
     "package-linux": "electron-packager . BeaverText --icon=icon64.png --platform=linux --arch=x64 --asar --overwrite --out=./out",
-    "package-macos": "electron-packager . BeaverText --icon=icon64.png --platform=darwin --prune=true --arch=x64 --asar --overwrite --out=./out"
+    "package-macos": "electron-packager . BeaverText --icon=icon256.png --platform=darwin --arch=x64 --asar --overwrite --out=./out"
   },
   "repository": "https://github.com/julius/beavertext",
   "keywords": [
@@ -19,8 +19,8 @@
   ],
   "author": "Julius Eckert",
   "devDependencies": {
-    "electron": "~1.6.2",
-    "electron-packager": "^9.0.0"
+    "electron": "^4.0.1",
+    "electron-packager": "^13.0.0"
   },
   "dependencies": {}
 }
