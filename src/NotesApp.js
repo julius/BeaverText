@@ -99,17 +99,17 @@ class NotesApp {
                 submenu: [
                     {
                         label: "Open File",
-                        accelerator: "Ctrl+O",
+                        accelerator: "CmdOrCtrl+O",
                         click: () => this.handleButtonOpen(),
                     },
                     {
                         label: "Save File",
-                        accelerator: "Ctrl+S",
+                        accelerator: "CmdOrCtrl+S",
                         click: () => this.handleButtonSave(),
                     },
                     {
                         label: "Close File",
-                        accelerator: "Ctrl+W",
+                        accelerator: "CmdOrCtrl+W",
                         click: () => this.activeFile && this.activeFile.close(),
                     },
                     {type: 'separator'},
@@ -120,26 +120,64 @@ class NotesApp {
                 ]
             },
             {
+                label: "Edit",
+                submenu: [
+                  {
+                    label: "Undo",
+                    accelerator: "CmdOrCtrl+Z",
+                    selector: "undo:"
+                  },
+                  {
+                    label: "Redo",
+                    accelerator: "Shift+CmdOrCtrl+Z",
+                    selector: "redo:"
+                  },
+                  {
+                    type: "separator"
+                  },
+                  {
+                    label: "Cut",
+                    accelerator: "CmdOrCtrl+X",
+                    selector: "cut:"
+                  },
+                  {
+                    label: "Copy",
+                    accelerator: "CmdOrCtrl+C",
+                    selector: "copy:"
+                  },
+                  {
+                    label: "Paste",
+                    accelerator: "CmdOrCtrl+V",
+                    selector: "paste:"
+                  },
+                  {
+                    label: "Select All",
+                    accelerator: "CmdOrCtrl+A",
+                    selector: "selectAll:"
+                  }
+                ]
+              },
+            {
                 label: "Tabs",
                 submenu: [
                     {
                         label: "Next Tab",
-                        accelerator: "Ctrl+PageDown",
+                        accelerator: "CmdOrCtrl+PageDown",
                         click: () => this.gotoNextTab(),
                     },
                     {
                         label: "Next Tab",
-                        accelerator: "Ctrl+Tab",
+                        accelerator: "CmdOrCtrl+Tab",
                         click: () => this.gotoNextTab(),
                     },
                     {
                         label: "Prev Tab",
-                        accelerator: "Ctrl+PageUp",
+                        accelerator: "CmdOrCtrl+PageUp",
                         click: () => this.gotoPrevTab(),
                     },
                     {
                         label: "Prev Tab",
-                        accelerator: "Ctrl+Shift+Tab",
+                        accelerator: "CmdOrCtrl+Shift+Tab",
                         click: () => this.gotoPrevTab(),
                     },
                 ]

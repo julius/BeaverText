@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "package-win32": "electron-packager . BeaverText --icon=icon256.ico --platform=win32 --arch=x64 --asar --overwrite --out=./out",
-    "package-linux": "electron-packager . BeaverText --icon=icon64.png --platform=linux --arch=x64 --asar --overwrite --out=./out"
+    "package-linux": "electron-packager . BeaverText --icon=icon64.png --platform=linux --arch=x64 --asar --overwrite --out=./out",
+    "package-macos": "electron-packager . BeaverText --icon=icon64.png --platform=darwin --prune=true --arch=x64 --asar --overwrite --out=./out"
   },
   "repository": "https://github.com/julius/beavertext",
   "keywords": [
