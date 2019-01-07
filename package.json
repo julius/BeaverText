@@ -1,17 +1,16 @@
 {
-  "name": "SuPlainText",
+  "name": "BeaverText",
   "version": "1.0.0",
   "description": "Supercharged Plain Text Notes",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . SuPlainText --platform=win32 --arch=x64 --asar --overwrite --out=./out",
-    "package-win32": "electron-packager . SuPlainText --platform=win32 --arch=x64 --asar --overwrite --out=./out",
-    "package-linux": "electron-packager . SuPlainText --platform=linux --arch=x64 --asar --overwrite --out=./out"
+    "package-win32": "electron-packager . BeaverText --icon=icon256.ico --platform=win32 --arch=x64 --asar --overwrite --out=./out",
+    "package-linux": "electron-packager . BeaverText --icon=icon64.png --platform=linux --arch=x64 --asar --overwrite --out=./out"
   },
-  "repository": "https://github.com/julius/suplaintext",
+  "repository": "https://github.com/julius/beavertext",
   "keywords": [
-    "suplaintext",
+    "beavertext",
     "plain",
     "text",
     "notes",

@@ -1,4 +1,4 @@
-# SuPlainText - Supercharged Plain Text Notes
+# Beaver Text - Supercharged Plain Text Notes
 Notes App for **Plain Text Files**
 - **No Lock-In:** Edit your notes with any text-editor.
 - **Sync your way:** Sync your notes with Dropbox, GDrive, git...
@@ -30,3 +30,5 @@ This is build using
 - CropperJS (Image Cropping)
 - Bootstrap+jQuery
 
+## Icon Attribution
+Logo-Icon made by [Freepik](http://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
