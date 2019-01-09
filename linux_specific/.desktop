@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=BeaverText
+Exec=sh -c "$(dirname %k)/BeaverText"
+Terminal=false
+Type=Application

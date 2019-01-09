@@ -1,4 +1,7 @@
 # Beaver Text - Supercharged Plain Text Notes
+
+![Icon](icon64.png) 
+
 Notes App for **Plain Text Files**
 - **No Lock-In:** Edit your notes with any text-editor.
 - **Sync your way:** Sync your notes with Dropbox, GDrive, git...

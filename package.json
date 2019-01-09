@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "package-win32": "electron-packager . BeaverText --icon=icon256.ico --platform=win32 --arch=x64 --asar --overwrite --out=./out",
-    "package-linux": "electron-packager . BeaverText --icon=icon64.png --platform=linux --arch=x64 --asar --overwrite --out=./out",
+    "package-linux": "electron-packager . BeaverText --icon=icon256.png --platform=linux --arch=x64 --asar --overwrite --out=./out && cp linux_specific/.desktop out/BeaverText-linux-x64",
     "package-macos": "electron-packager . BeaverText --icon=icon256.png --platform=darwin --arch=x64 --asar --overwrite --out=./out"
   },
   "repository": "https://github.com/julius/beavertext",
@@ -21,6 +21,5 @@
   "devDependencies": {
     "electron": "^4.0.1",
     "electron-packager": "^13.0.0"
-  },
-  "dependencies": {}
+  }
 }
