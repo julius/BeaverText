@@ -7,6 +7,8 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
+const iconPath = path.resolve(__dirname, "icon32.png");
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -14,10 +16,11 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-      icon: "./icon32.png",
+    icon: iconPath,
     width: 800,
     height: 600,
     webPreferences: {
+      nodeIntegration: true,
       partition: "persist:notesapp",
     }
   })
