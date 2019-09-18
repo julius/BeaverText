@@ -1,25 +1,25 @@
 {
-  "name": "BeaverText",
-  "version": "1.0.0",
-  "description": "Supercharged Plain Text Notes",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "package-win32": "electron-packager . BeaverText --icon=icon256.ico --platform=win32 --arch=x64 --asar --overwrite --out=./out",
-    "package-linux": "electron-packager . BeaverText --icon=icon256.png --platform=linux --arch=x64 --asar --overwrite --out=./out && cp linux_specific/* out/BeaverText-linux-x64",
-    "package-macos": "electron-packager . BeaverText --icon=icon256.png --platform=darwin --arch=x64 --asar --overwrite --out=./out"
-  },
-  "repository": "https://github.com/julius/beavertext",
-  "keywords": [
-    "beavertext",
-    "plain",
-    "text",
-    "notes",
-    "electron"
-  ],
-  "author": "Julius Eckert",
-  "devDependencies": {
-    "electron": "^4.0.1",
-    "electron-packager": "^13.0.0"
-  }
+    "name": "BeaverText",
+    "version": "1.0.0",
+    "description": "Supercharged Plain Text Notes",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "package-win32": "electron-packager . BeaverText --icon=resources/icon256.ico --platform=win32 --arch=x64 --asar --overwrite --out=./out",
+        "package-linux": "electron-packager . BeaverText --icon=resources/icon256.png --platform=linux --arch=x64 --asar --overwrite --out=./out && cp linux_specific/* out/BeaverText-linux-x64",
+        "package-macos": "electron-packager . BeaverText --icon=resources/icon256.icns --platform=darwin --arch=x64 --asar --overwrite --out=./out"
+    },
+    "repository": "https://github.com/julius/beavertext",
+    "keywords": [
+        "beavertext",
+        "plain",
+        "text",
+        "notes",
+        "electron"
+    ],
+    "author": "Julius Eckert",
+    "devDependencies": {
+        "electron": "^4.0.1",
+        "electron-packager": "^14.0.0"
+    }
 }

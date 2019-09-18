@@ -7,7 +7,7 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
-const iconPath = path.resolve(__dirname, "icon32.png");
+const iconPath = path.resolve(__dirname + "/resources/icon32.png");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
