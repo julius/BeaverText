@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=BeaverText
-Exec=sh -c "$(dirname %k)/BeaverText"
+Exec=DIR/BeaverText
+Icon=DIR/icon256.png
 Terminal=false
 Type=Application
